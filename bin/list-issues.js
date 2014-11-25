@@ -12,18 +12,27 @@ var github = require( 'github' )
 		}
 	} );
 
-g.authenticate( {
-	type    : 'oauth',
-	key     : process.env.GH_KEY,
-	secret  : process.env.GH_SECRET
-} );
+if (process.env.GH_TOKEN) {
+	g.authenticate( {
+		type    : 'oauth',
+		token   : process.env.GH_TOKEN
+	} )
+}
+else if (process.env.GH_SECRET) {
+	g.authenticate( {
+		type    : 'oauth',
+		key     : process.env.GH_KEY,
+		secret  : process.env.GH_SECRET
+	} )
+}
+
 
 g.issues.repoIssues( {
-	user: 'avriette',
-	repo: 'riak-dc',
+	user: '18F',
+	repo: 'Sendak',
 } , function (e, m) {
 		var results     = [ ]
-			,  longest_num = longest( [ m.map( function (issue) { return '' + issue.number } ) ] );
+			, longest_num = longest( [ m.map( function (issue) { return '' + issue.number } ) ] );
 
 		m.forEach( function (issue) {
 			results.push( ' ' + star + '  [' + rpad( issue.number, longest_num + 2) + ']  ' + issue.title );
