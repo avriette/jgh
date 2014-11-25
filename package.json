@@ -1,0 +1,29 @@
+{
+  "name": "jgh",
+  "version": "0.0.1",
+  "description": "Jane's interface to Github from the shell",
+  "main": "lib/jgh.js",
+  "dependencies": {
+    "github": "^0.2.3"
+  },
+  "devDependencies": { "github": "*" },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avriette/jgh.git"
+  },
+  "keywords": [
+    "github",
+    "shell",
+    "cli",
+    "tiny"
+  ],
+  "author": "Jane Avriette <jane.avriette@gsa.gov> (http://deepthoughts.feminist.pw/)",
+  "license": "CCO-1.0",
+  "bugs": {
+    "url": "https://github.com/avriette/jgh/issues"
+  },
+  "homepage": "https://github.com/avriette/jgh"
+}
