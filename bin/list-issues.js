@@ -1,4 +1,15 @@
-var star = '😜';
+#!/usr/bin/env node
+
+var star      = '😜'
+	, fs        = require( 'fs' )
+	, watchfile = 'etc/watched.json'
+	, watched   = fs.existsSync( watchfile ) ?
+			JSON.parse( fs.readFileSync( watchfile ).toString() ) : { 'default' :
+			{
+				user: 'avriette',
+				repo: 'issues',
+			}
+		}
 
 var github = require( 'github' )
 	, g      = new github( {
@@ -12,7 +23,7 @@ var github = require( 'github' )
 		}
 	} );
 
-if (process.env.GH_TOKEN) {
+if (process.env.GH_TOKEN) { // {{{
 	g.authenticate( {
 		type    : 'oauth',
 		token   : process.env.GH_TOKEN
@@ -24,21 +35,24 @@ else if (process.env.GH_SECRET) {
 		key     : process.env.GH_KEY,
 		secret  : process.env.GH_SECRET
 	} )
-}
+} // }}}
 
-
-g.issues.repoIssues( {
-	user: '18F',
-	repo: 'Sendak',
-} , function (e, m) {
-		var results     = [ ]
-			, longest_num = longest( [ m.map( function (issue) { return '' + issue.number } ) ] );
-
-		m.forEach( function (issue) {
-			results.push( ' ' + star + '  [' + rpad( issue.number, longest_num + 2) + ']  ' + issue.title );
-		} );
-
-		console.log( results.join( "\n" ) );
+Object.keys( watched ).forEach( function (reponame) {
+	g.issues.repoIssues( {
+		user: watched[reponame].user,
+		repo: watched[reponame].repo,
+		assignee: watched[reponame].assignee ? watched[reponame].assignee : null,
+		state: watched[reponame].state ? watched[reponame].state : null
+	} , function (e, m) {
+			var results     = [ ]
+				, longest_num = longest( [ m.map( function (issue) { return '' + issue.number } ) ] );
+	
+			m.forEach( function (issue) {
+				results.push( ' (' + reponame + ') ' + star + '  [' + rpad( issue.number, longest_num + 2) + ']  ' + issue.title );
+			} );
+	
+			console.log( results.join( "\n" ) );
+	} );
 } );
 
 
