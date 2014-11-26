@@ -1,0 +1,14 @@
+{
+  "devops": {
+    "user": "18F",
+    "repo": "DevOps",
+    "assignee": "avriette",
+    "state": "open"
+  },
+  "18f-sendak": {
+    "user": "18F",
+    "repo": "Sendak",
+    "assignee": "avriette",
+    "state": "open"
+  }
+}
