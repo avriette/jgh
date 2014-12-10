@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var star      = '😜'
+	, tagged    = '👾'
 	, fs        = require( 'fs' )
 	, watchfile = 'etc/watched.json'
 	, watched   = fs.existsSync( watchfile ) ?
@@ -14,7 +17,7 @@ var star      = '😜'
 var github = require( 'github' )
 	, g      = new github( {
 		version  : '3.0.0',
-		// debug    : true,
+		debug    : false,
 		protocol : 'https',
 		timeout  : 5000,
 
@@ -41,14 +44,25 @@ Object.keys( watched ).forEach( function (reponame) {
 	g.issues.repoIssues( {
 		user: watched[reponame].user,
 		repo: watched[reponame].repo,
-		assignee: watched[reponame].assignee ? watched[reponame].assignee : null,
+		// assignee: watched[reponame].assignee ? watched[reponame].assignee : null,
 		state: watched[reponame].state ? watched[reponame].state : null
 	} , function (e, m) {
 			var results     = [ ]
 				, longest_num = longest( [ m.map( function (issue) { return '' + issue.number } ) ] );
 	
 			m.forEach( function (issue) {
-				results.push( ' (' + reponame + ') ' + star + '  [' + rpad( issue.number, longest_num + 2) + ']  ' + issue.title );
+				var indicator;
+				// console.log( issue.body.substr(0, 128) );
+				if (new RegExp( 'avriette' ).exec( issue.body )) {
+					// This has me tagged in it
+					//
+					indicator = star + tagged;
+				}
+				else {
+					indicator = star;
+				}
+
+				results.push( ' (' + reponame + ') ' + indicator + '  [' + rpad( issue.number, longest_num + 2) + ']  ' + issue.title );
 			} );
 	
 			console.log( results.join( "\n" ) );

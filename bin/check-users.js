@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var star = '😜';
 
 var github = require( 'github' )
