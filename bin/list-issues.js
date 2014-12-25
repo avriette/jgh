@@ -9,7 +9,7 @@ var star      = '😜'
 	, watched   = fs.existsSync( watchfile ) ?
 			JSON.parse( fs.readFileSync( watchfile ).toString() ) : { 'default' :
 			{
-				user: 'avriette',
+				user: 'janearc',
 				repo: 'issues',
 			}
 		}
@@ -53,7 +53,8 @@ Object.keys( watched ).forEach( function (reponame) {
 			m.forEach( function (issue) {
 				var indicator;
 				// console.log( issue.body.substr(0, 128) );
-				if (new RegExp( 'avriette' ).exec( issue.body )) {
+				console.log( issue )
+				if (new RegExp( 'janearc' ).test( issue.body )) {
 					// This has me tagged in it
 					//
 					indicator = star + tagged;
@@ -91,8 +92,8 @@ function rpad(str, length) { // {{{
 /*
   FOR EXAMPLE: {{{
 
-  { url: 'https://api.github.com/repos/avriette/riak-dc/issues/4',
-    labels_url: 'https://api.github.com/repos/avriette/riak-dc/issues/4/labels{/name}',
+  { url: 'https://api.github.com/repos/janearc/riak-dc/issues/4',
+    labels_url: 'https://api.github.com/repos/janearc/riak-dc/issues/4/labels{/name}',
     comments_url: 'https://api.github.com/repos/avriette/riak-dc/issues/4/comments',
     events_url: 'https://api.github.com/repos/avriette/riak-dc/issues/4/events',
     html_url: 'https://github.com/avriette/riak-dc/issues/4',
