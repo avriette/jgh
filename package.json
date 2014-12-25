@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/avriette/jgh.git"
+    "url": "https://github.com/janearc/jgh.git"
   },
   "keywords": [
     "github",
@@ -20,10 +20,10 @@
     "cli",
     "tiny"
   ],
-  "author": "Jane Avriette <jane.avriette@gsa.gov> (http://deepthoughts.feminist.pw/)",
+  "author": "Jane Arc <jane@cpan.org> (http://github.com/janearc)",
   "license": "CCO-1.0",
   "bugs": {
-    "url": "https://github.com/avriette/jgh/issues"
+    "url": "https://github.com/janearc/jgh/issues"
   },
-  "homepage": "https://github.com/avriette/jgh"
+  "homepage": "https://github.com/janearc/jgh"
 }
